@@ -1,0 +1,34 @@
+@URL=http://localhost
+@PORT=3003
+@baseUrl={{URL}}:{{PORT}}
+
+
+# @name login
+POST {{baseUrl}}/api/login
+Content-Type: application/json
+
+{ 
+    "username": "testimiu",
+    "password": "salasana"
+}
+
+
+
+#########################
+
+@updating_blog_ID=639852287edca18ca0c5dbdb
+
+
+@authToken={{login.response.body.token}}
+
+
+PUT {{baseUrl}}/api/blogs/{{updating_blog_ID}}
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{ 
+    "title": "Miuku bloggaa taas vol 3",
+    "author": "miuku",
+    "url": "www.miuku.fi",
+    "likes": 9999
+}

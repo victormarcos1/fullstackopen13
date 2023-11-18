@@ -1,0 +1,29 @@
+@URL=http://localhost
+@PORT=3003
+@baseUrl={{URL}}:{{PORT}}
+
+
+# @name login
+POST {{baseUrl}}/api/login
+Content-Type: application/json
+
+{ 
+    "username": "kiisu@kissa.fi",
+    "password": "salainen"
+}
+
+
+
+#########################
+@authToken = {{login.response.body.token}}
+
+POST {{baseUrl}}/api/blogs
+Content-Type: application/json
+Authorization: bearer {{authToken}}
+
+{ 
+    "title": "kirjat vol 333",
+    "author": "uusittava kissa",
+    "likes": 6,
+    "url": "www.miuu.fi"
+}

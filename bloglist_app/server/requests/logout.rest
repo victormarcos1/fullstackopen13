@@ -1,0 +1,24 @@
+
+@URL=http://localhost
+@PORT=3003
+@baseUrl={{URL}}:{{PORT}}
+
+
+# @name login
+POST {{baseUrl}}/api/login
+Content-Type: application/json
+
+{ 
+    "username": "kiisu@kissa.fi",
+    "password": "salainen"
+}
+
+#######################
+
+
+@authToken={{login.response.body.token}}
+
+
+DELETE {{baseUrl}}/api/logout
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
